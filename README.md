@@ -21,9 +21,11 @@ $ yarn start --watch
 ## Build Backend
 
 ```bash
-$ cd backend
+$ cd docker
 
-$ yarn install
+$ docker compose up
 
-$ yarn start --watch
+$ docker ps
+
+$ docker exec -it <container_name_or_id> /bin/sh
 ```
