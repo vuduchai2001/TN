@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  db:
+    container_name: base-mysql
+    image: mariadb:10.8.2
+    ports:
+      - 33061:3306
+    restart: always
+    expose:
+      - 3306
+    volumes:
+      - ~/base-nest:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: nest-base
+      MYSQL_PASSWORD: 1
+  cache:
+    container_name: base-cache
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    expose:
+      - 6379
+    volumes:
+      - ~/base-nest/cache:/data
+  backend:
+    container_name: base-backend
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=3306
+      - REDIS_HOST=cache
+    ports:
+      - 1303:3000
+    depends_on:
+      - db
+      - cache
