@@ -1,7 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './services/user.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { FindReq } from 'src/base/dto/find.dto';
+import { JwtGuard } from 'src/common/decorator/auth.decorator';
 
 @Controller('users')
 @ApiTags('Users')
@@ -10,6 +21,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @UseGuards(JwtGuard)
   async findAll(@Query() payload: FindReq) {
     return await this.userService.findAll(payload);
   }

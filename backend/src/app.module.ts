@@ -8,6 +8,7 @@ import { BullModule } from '@nestjs/bull';
 import { IRedis } from './common/config/redis.config';
 import { UserModule } from './user/user.module';
 import { EntitesModule } from './entities';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { EntitesModule } from './entities';
     }),
     UserModule,
     EntitesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

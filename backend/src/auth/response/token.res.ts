@@ -2,14 +2,14 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class LoginRes {
   @ApiProperty()
-  accessToken: string;
+  accessToken?: string;
 
   @ApiProperty()
-  refreshToken: string;
+  refreshToken?: string;
 
   @ApiProperty()
-  expiresIn: number;
+  expiresIn?: number;
 
   @ApiProperty()
-  expiresAt: number;
+  expiresAt?: number;
 }
